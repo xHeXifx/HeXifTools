@@ -1,0 +1,24 @@
+name: HeXifTools
+version: 4.0
+main: org.hexif.hexiftools.HeXifTools
+api-version: '1.21'
+
+commands:
+  hexiftools:
+    description: Main command for HeXifTools
+    usage: /hexiftools help
+    aliases: [ht]
+
+permissions:
+  hexiftools.reload:
+    description: Allows reloading the plugin configuration
+    default: op
+  hexiftools.viewcontainers:
+    description: View known containers across the world
+    default: op
+  hexiftools.config:
+    description: Config manager for HeXifTools
+    default: op
+  hexiftools.help:
+    description: Display the help menu
+    default: true

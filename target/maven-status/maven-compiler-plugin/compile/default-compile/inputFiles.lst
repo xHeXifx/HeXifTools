@@ -1,0 +1,16 @@
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/Main.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/AnvilRenameListener.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/CommandHandler.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/ConfigCommand.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/ContainerBreakListener.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/CustomItems.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/DeathListener.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/DiscordWebhook.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/HeXifTools.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/HelpCommand.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/PlaceBlocker.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/PlaceListener.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/RecipeEditorGUI.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/RecipeManager.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/SignTextListener.java
+/Users/jdglo/GitHub/HeXifTools/src/main/java/org/hexif/hexiftools/ViewContainers.java

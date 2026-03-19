@@ -1,0 +1,30 @@
+# Discord Webhook Details
+webhook-url: PUT_YOUR_DISCORD_WEBHOOK_HERE
+roleID:  # Role ID mentioned when a hardcore death occurs
+
+excluded-players: []
+bypasswhenonline: []
+
+# "Containers" to track in viewContainers
+tracked-blocks:
+- minecraft:barrel
+- minecraft:chest
+- minecraft:shulker_box
+
+# Block players from placing certain blocks
+placeBlocker: {}
+
+# If you're server is hardcore / if you want player death notifacations
+hardcoreMode: true
+
+features:
+  # General Features
+  anvilFormatting: true
+  trackContainers: true
+  
+  # Discord Webhook Sending
+  sendPlayerDeath: true
+  sendEntityDeath: true
+  sendPlayerJoinLeave: true
+
+custom-recipes:
