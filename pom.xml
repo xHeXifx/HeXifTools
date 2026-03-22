@@ -6,7 +6,7 @@
 
     <groupId>org.hexif</groupId>
     <artifactId>HeXifTools</artifactId>
-    <version>4.0.0</version>
+    <version>4.1.0</version>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>

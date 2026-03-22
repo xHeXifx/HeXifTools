@@ -1,9 +1,11 @@
 package org.hexif.hexiftools;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import java.io.File;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,11 +13,10 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 public class HeXifTools extends JavaPlugin {
 
@@ -28,6 +29,7 @@ public class HeXifTools extends JavaPlugin {
     private RecipeManager recipeManager;
     private RecipeEditorGUI recipeEditorGUI;
     private CustomItems customItems;
+    private ToDoCommand toDoCommand;
 
     @Override
     public void onEnable() {
@@ -93,6 +95,10 @@ public class HeXifTools extends JavaPlugin {
         return recipeEditorGUI;
     }
 
+    public ToDoCommand getToDoCommand() {
+        return toDoCommand;
+    }
+
     private void loadConfig() {
         String webhookUrl = getConfig().getString("webhook-url");
         
@@ -135,8 +141,9 @@ public class HeXifTools extends JavaPlugin {
             recipeManager.reloadCustomRecipes();
         }
 
+        toDoCommand = new ToDoCommand(getLogger(), getDataFolder());
         
-        deathListener = new DeathListener(webhook, excludedPlayers, bypassWhenOnline, hardcoreMode, roleID, this);
+        deathListener = new DeathListener(webhook, excludedPlayers, bypassWhenOnline, hardcoreMode, roleID, this, toDoCommand);
         Bukkit.getPluginManager().registerEvents(deathListener, this);
         
         placeListener = new PlaceListener(trackedBlocks, getDataFolder(), getLogger(), placeBlocker, this);

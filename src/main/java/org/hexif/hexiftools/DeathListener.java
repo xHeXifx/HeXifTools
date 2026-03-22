@@ -1,8 +1,15 @@
 package org.hexif.hexiftools;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Statistic;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.Tameable;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -13,8 +20,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.List;
-
 public class DeathListener implements Listener {
 
     private final DiscordWebhook webhook;
@@ -23,14 +28,16 @@ public class DeathListener implements Listener {
     private final boolean hardcoreMode;
     private final long roleID;
     private final JavaPlugin plugin;
+    private final ToDoCommand todos;
 
-    public DeathListener(DiscordWebhook webhook, List<String> excludedPlayers, List<String> bypassWhenOnline, boolean hardcoreMode, long roleID, JavaPlugin plugin) {
+    public DeathListener(DiscordWebhook webhook, List<String> excludedPlayers, List<String> bypassWhenOnline, boolean hardcoreMode, long roleID, JavaPlugin plugin, ToDoCommand todos) {
         this.webhook = webhook;
         this.excludedPlayers = excludedPlayers;
         this.bypassWhenOnline = bypassWhenOnline;
         this.hardcoreMode = hardcoreMode;
         this.roleID = roleID;
         this.plugin = plugin;
+        this.todos = todos;
     }
 
     @EventHandler
@@ -191,6 +198,8 @@ public class DeathListener implements Listener {
             return;
         }
         
+        todos.viewToDos(event.getPlayer());
+
         webhook.sendEmbed(
             "Player Joined",
             "**" + playerName + "** joined the game",

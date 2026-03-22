@@ -1,20 +1,20 @@
 package org.hexif.hexiftools;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 public class CommandHandler implements CommandExecutor, TabCompleter {
 
@@ -223,6 +223,44 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                 sender.sendMessage("§eUsage: /ht config <argument>");
                 return true;
             }
+            case "todo" -> {
+                if (plugin.getToDoCommand() == null) {
+                    sender.sendMessage("§cTodos are not avalible right now.");
+                    return true;
+                }
+
+                if (args.length < 2) {
+                    sender.sendMessage("§cUsage: /" + label + " todo <create|view|complete> ...");
+                    return true;
+                }
+                String todoAction = args[1].toLowerCase(Locale.ROOT);
+                if (todoAction.equals("create")) {
+                    if (args.length < 4) {
+                        sender.sendMessage("§cUsage: /" + label + " todo create <title> <target>");
+                        sender.sendMessage("§7Target: player name or " + ToDoCommand.TARGET_EVERYONE);
+                        return true;
+                    }
+                    String target = args[args.length - 1];
+                    String title = String.join(" ", Arrays.copyOfRange(args, 2, args.length - 1));
+                    plugin.getToDoCommand().createToDo(sender, title, target);
+                    return true;
+                }
+                if (todoAction.equals("view")) {
+                    plugin.getToDoCommand().viewToDos(sender);
+                    return true;
+                }
+                if (todoAction.equals("complete")) {
+                    if (args.length < 3) {
+                        sender.sendMessage("§cUsage: /" + label + " todo complete <title>");
+                        return true;
+                    }
+                    String title = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
+                    plugin.getToDoCommand().completeToDo(sender, title);
+                    return true;
+                }
+                sender.sendMessage("§cUnknown todo action. Use §fcreate§c, §fview§c, or §fcomplete§c.");
+                return true;
+            }
             default -> {
                 sender.sendMessage("§cUnknown subcommand: §f" + args[0]);
                 helpCommand.sendHelp(sender, label);
@@ -241,6 +279,7 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
             if (sender.hasPermission("hexiftools.help")) candidates.add("help");
             if (sender.hasPermission("hexiftools.config")) candidates.add("config");
             candidates.add("credits");
+            candidates.add("todo");
             return partial(args[0], candidates);
         }
 
@@ -303,6 +342,32 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
                 && args[2].equalsIgnoreCase("blocks")
                 && (args[3].equalsIgnoreCase("add") || args[3].equalsIgnoreCase("remove"))) {
             return partial(args[5], getAllBlockIds());
+        }
+
+        if (args.length == 2 && args[0].equalsIgnoreCase("todo")) {
+            List<String> sub = new ArrayList<>();
+            sub.add("create");
+            sub.add("view");
+            sub.add("complete");
+            return partial(args[1], sub);
+        }
+
+        if (args.length >= 3
+            && args[0].equalsIgnoreCase("todo")
+            && args[1].equalsIgnoreCase("complete")
+            && sender instanceof Player p
+            && plugin.getToDoCommand() != null) {
+                String[] titleParts = Arrays.copyOfRange(args, 2, args.length);
+                return plugin.getToDoCommand().tabCompleteAssignableTitles(p, titleParts);
+            }
+
+        if (args.length >= 4
+            && args[0].equalsIgnoreCase("todo")
+            && args[1].equalsIgnoreCase("create")
+        ) {
+            List<String> last = new ArrayList<>(getAllPlayerNames());
+            last.add(ToDoCommand.TARGET_EVERYONE);
+            return partial(args[args.length - 1], last);
         }
         
 

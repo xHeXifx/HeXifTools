@@ -20,5 +20,9 @@ public class HelpCommand {
     if (sender.hasPermission("hexiftools.config")) {
       sender.sendMessage("§e/" + label + " config §7- Manage the config");
     }
+    sender.sendMessage("§e/" + label + " todo create <title> <target> §7- Add a todo (" + ToDoCommand.TARGET_EVERYONE + " or player)");
+    sender.sendMessage("§e/" + label + " todo complete <title> §7- Complete a todo assigned to you");
+    sender.sendMessage("§e/" + label + " todo view §7- List todos for you and " + ToDoCommand.TARGET_EVERYONE);
+    sender.sendMessage("§e/" + label + " credits §7 - Plugin credits");
   }
 }

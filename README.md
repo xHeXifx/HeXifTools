@@ -16,6 +16,7 @@ This started off as just a random project as i wanted to try java, it contains r
 - Custom Items (Big Exp Bottle)
 - Custom Recipes
 - Container / Placement Tracking
+- ToDo system
 
 ## Setup
 
@@ -72,6 +73,12 @@ You used to be able to put "§x" in your message and format text with bold lette
 - Viewable via an in-game GUI
   <br>
   <img src=".readmeAssets/previews/TrackContainers.png" width="400">
+
+### ToDo System
+- Add, view, and complete todos in game
+- Assign todos to specific people or everyone
+- Assigned todos are shown on player join
+- Use `/ht todo create|view|complete` to manage your list
 
 
 ## Dev Notes
